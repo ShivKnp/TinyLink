@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TinyLink</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <div class="max-w-5xl mx-auto px-4 py-12">
+    <header class="mb-10 text-center">
+      <h1 class="text-3xl font-semibold text-gray-900 mb-1">TinyLink</h1>
+      <p class="text-sm text-gray-500">Shorten and track your URLs</p>
+    </header>
+
+    <!-- Add Link Form -->
+    <div class="bg-white rounded-lg border border-gray-200 p-6 mb-8">
+      <form id="linkForm" class="space-y-4">
+        <div>
+          <input
+            id="url"
+            type="url"
+            placeholder="Enter long URL"
+            class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            required
+          />
+        </div>
+
+        <div class="flex gap-3">
+          <input
+            id="code"
+            type="text"
+            placeholder="Custom code (optional)"
+            pattern="[A-Za-z0-9]{6,8}"
+            class="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+          <button
+            type="submit"
+            id="submitBtn"
+            class="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed font-medium transition-colors"
+          >
+            Create
+          </button>
+        </div>
+
+        <div id="errorMessage" class="hidden text-sm text-red-600"></div>
+        <div id="successMessage" class="hidden text-sm text-green-600"></div>
+      </form>
+    </div>
+
+    <!-- Links Table -->
+    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+      <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+        <h2 class="text-sm font-medium text-gray-900">All Links</h2>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search..."
+          class="px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-48"
+        />
+      </div>
+
+      <div id="loadingMessage" class="p-12 text-center text-sm text-gray-500">Loading...</div>
+      <div id="emptyMessage" class="hidden p-12 text-center text-sm text-gray-500"></div>
+
+      <div id="tableContainer" class="hidden">
+        <table class="w-full">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Code</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">URL</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Clicks</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Last Click</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="linksTableBody" class="divide-y divide-gray-200">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

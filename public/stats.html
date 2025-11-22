@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Link Stats - TinyLink</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <header class="mb-8">
+      <a href="/" class="text-sm text-blue-600 hover:text-blue-800 mb-4 inline-block">
+        ← Back
+      </a>
+      <h1 class="text-2xl font-semibold text-gray-900 mb-1">Link Statistics</h1>
+      <p class="text-sm text-gray-500">
+        Code: <span id="codeDisplay" class="font-mono font-medium"></span>
+      </p>
+    </header>
+
+    <div id="loadingMessage" class="bg-white rounded-lg border border-gray-200 p-12 text-center text-sm text-gray-500">
+      Loading...
+    </div>
+
+    <div id="notFoundMessage" class="hidden bg-white rounded-lg border border-gray-200 p-12 text-center">
+      <h2 class="text-lg font-semibold text-gray-900 mb-2">Link Not Found</h2>
+      <p class="text-sm text-gray-600 mb-4">The link you're looking for doesn't exist.</p>
+      <a href="/" class="text-sm text-blue-600 hover:text-blue-800">← Back to Dashboard</a>
+    </div>
+
+    <div id="statsContainer" class="hidden bg-white rounded-lg border border-gray-200 p-8 space-y-6">
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-2">Short Code</label>
+        <div class="flex items-center gap-3">
+          <code id="shortCode" class="px-4 py-2 bg-gray-50 rounded-lg text-sm font-mono text-blue-600"></code>
+          <button
+            id="copyButton"
+            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-2">Short URL</label>
+        <div class="px-4 py-2 bg-gray-50 rounded-lg border border-gray-200">
+          <a id="shortUrlLink" href="#" target="_blank" rel="noopener noreferrer" class="text-sm text-blue-600 hover:text-blue-800 break-all"></a>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-2">Target URL</label>
+        <div class="px-4 py-2 bg-gray-50 rounded-lg border border-gray-200">
+          <a id="targetUrlLink" href="#" target="_blank" rel="noopener noreferrer" class="text-sm text-blue-600 hover:text-blue-800 break-all"></a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-blue-50 rounded-lg p-4">
+          <div class="text-xs font-medium text-gray-600 mb-1">Total Clicks</div>
+          <div id="totalClicks" class="text-2xl font-semibold text-blue-600"></div>
+        </div>
+
+        <div class="bg-green-50 rounded-lg p-4">
+          <div class="text-xs font-medium text-gray-600 mb-1">Last Clicked</div>
+          <div id="lastClicked" class="text-sm font-medium text-green-600"></div>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-gray-200 text-xs text-gray-500">
+        <div class="mb-1">
+          <strong>Created:</strong> <span id="createdAt"></span>
+        </div>
+        <div>
+          <strong>Updated:</strong> <span id="updatedAt"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/stats.js"></script>
+</body>
+</html>
