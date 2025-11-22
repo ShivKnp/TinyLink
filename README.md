@@ -54,7 +54,7 @@ Create a `.env` file in the root directory:
 ```env
 
 # OR for MongoDB Atlas (recommended for production):
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/tinylink?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/tinylink?retryWrites=true&w=majority
 
 # Server Port (optional, defaults to 3000)
 PORT=3000
