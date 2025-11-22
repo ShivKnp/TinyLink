@@ -23,7 +23,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(join(__dirname, "public")));
 
 // Connect to MongoDB
-connectDB();
+let dbConnected = false;
+connectDB()
+  .then(() => {
+    dbConnected = true;
+    console.log("Database connection established");
+  })
+  .catch((err) => {
+    console.error("Failed to connect to database:", err.message);
+    console.error("Please check your MONGODB_URI or DATABASE_URL environment variable");
+  });
 
 // Routes
 app.use("/api/links", linksRouter);

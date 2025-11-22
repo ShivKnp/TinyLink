@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import { connectDB } from "../lib/db.js";
 import Link from "../models/Link.js";
 
@@ -8,6 +9,12 @@ const router = express.Router();
 router.get("/:code", async (req, res) => {
   try {
     await connectDB();
+    
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: "Database not connected" });
+    }
+    
     const { code } = req.params;
 
     // Validate code format (6-8 alphanumeric)

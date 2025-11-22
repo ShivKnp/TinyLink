@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import { connectDB } from "../../lib/db.js";
 import Link from "../../models/Link.js";
 
@@ -23,11 +24,21 @@ function isValidCode(code) {
 router.get("/", async (req, res) => {
   try {
     await connectDB();
+    
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: "Database not connected" });
+    }
+    
     const links = await Link.find().sort({ createdAt: -1 });
     res.json(links);
   } catch (err) {
     console.error("GET /api/links error:", err);
-    res.status(500).json({ error: err.message || "Server error" });
+    const errorMessage = err.message || "Server error";
+    res.status(500).json({ 
+      error: errorMessage,
+      details: process.env.NODE_ENV === "development" ? err.stack : undefined
+    });
   }
 });
 
@@ -35,6 +46,12 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     await connectDB();
+    
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: "Database not connected" });
+    }
+    
     const { url, code } = req.body;
 
     // Validate URL
@@ -89,6 +106,12 @@ router.post("/", async (req, res) => {
 router.get("/:code", async (req, res) => {
   try {
     await connectDB();
+    
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: "Database not connected" });
+    }
+    
     const { code } = req.params;
     const link = await Link.findOne({ code });
 
@@ -107,6 +130,12 @@ router.get("/:code", async (req, res) => {
 router.delete("/:code", async (req, res) => {
   try {
     await connectDB();
+    
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ error: "Database not connected" });
+    }
+    
     const { code } = req.params;
     const link = await Link.findOne({ code });
 
